@@ -1,0 +1,151 @@
+CREATE TABLE medicos (
+    crm INT PRIMARY KEY,
+    nome VARCHAR(28),
+    idade INT,
+    email VARCHAR(30),
+    telefone VARCHAR(30),
+    especializacao VARCHAR(28)
+    CHECK (especializacao IN ('cadiologista', 'nutricionista'))
+);
+
+
+CREATE TABLE pacientes (
+    id_paciente INT PRIMARY KEY,
+    nome VARCHAR(28),
+    idade INT,
+    email VARCHAR(30),
+    telefone VARCHAR(30),
+    endereco VARCHAR(30),
+    tipo_exame VARCHAR(20)
+    CHECK (tipo_exame IN ('clinico', 'laboratorial'))
+);
+
+
+CREATE TABLE consultas (
+    id_medico INT NOT NULL,
+    id_paciente INT NOT NULL,
+    data_consulta DATE,
+    horario_consulta TIME,
+    valor_consulta DOUBLE NOT NULL,
+    tipo_pagamento VARCHAR(20),
+    FOREIGN KEY (id_medico) REFERENCES medicos(crm),
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente)
+);
+
+
+CREATE TABLE exame (
+    id_medico INT NOT NULL,
+    id_paciente INT NOT NULL,
+    data_exame DATE,
+    horario TIME,
+    valor_exame DOUBLE NOT NULL,
+    tipo_pagamento_exame VARCHAR(28) UNIQUE,
+    tipo_exame VARCHAR(50) UNIQUE,
+
+    FOREIGN KEY (id_medico) REFERENCES medicos(crm),
+    FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente)
+);
+
+
+INSERT INTO medicos (crm, nome, idade, email, telefone, especializacao)
+VALUES
+(101, 'Carlos Silva', 45, 'carlos@med.com', '11987654321', 'cadiologista'),
+
+(102, 'Ana Pereira', 38, 'ana@med.com', '11991234567', 'nutricionista'),
+
+(103, 'Ricardo Santos', 50, 'ricardo@med.com', '11999887766', 'cadiologista');
+
+INSERT INTO pacientes (id_paciente, nome, idade, email, telefone, endereco, tipo_exame)
+VALUES
+(1, 'João Silva', 30, 'joao@email.com', '11990000001', 'Rua A, 100', 'clinico'),
+
+(2, 'Maria Souza', 25, 'maria@email.com', '11990000002', 'Rua B, 200', 'laboratorial'),
+
+(3, 'Pedro Lima', 40, 'pedro@email.com', '11990000003', 'Rua C, 300', 'clinico'),
+
+(4, 'Ana Costa', 35, 'ana@email.com', '11990000004', 'Rua D, 400', 'laboratorial'),
+
+(5, 'Lucas Pereira', 28, 'lucas@email.com', '11990000005', 'Rua E, 500', 'clinico');
+
+INSERT INTO consultas 
+(id_medico, id_paciente, data_consulta, horario_consulta, valor_consulta, tipo_pagamento)
+VALUES
+(101, 1, '2025-01-10', '09:00:00', 200.00, 'PIX'),
+
+(102, 2, '2025-01-11', '10:30:00', 150.00, 'CARTAO'),
+
+(103, 3, '2025-01-12', '14:00:00', 180.00, 'DINHEIRO'),
+
+(101, 4, '2025-01-13', '16:00:00', 220.00, 'BOLETO');
+
+
+INSERT INTO exame
+(id_medico, id_paciente, data_exame, horario, valor_exame, tipo_pagamento_exame, tipo_exame)
+VALUES
+(101, 2, '2025-01-15', '08:00:00', 120.00, 'PIX_EX', 'SANGUE'),
+
+(102, 4, '2025-01-16', '09:30:00', 90.00, 'CARTAO_EX', 'URINA'),
+
+(103, 5, '2025-01-17', '11:00:00', 200.00, 'DINHEIRO_EX', 'ECG');
+
+/*Deletandoo paciente com o id= 3*/
+delete from consultas where id_paciente = 3;
+delete from pacientes where id_paciente= 3;
+
+/*Usando o comado update para modificar o paciente com id =2*/
+update pacientes set telefone = '11990004402' where id_paciente = 2;
+
+/*Consultas básicas*/
+select* from pacientes;
+
+select nome,especializacao from medicos;
+
+select*from consultas where id_paciente = 1;
+
+select*from pacientes where idade >=25;
+
+select* from medicos where especializacao = 'cadiologista';
+
+/*Funções de agregação */
+/*Usando a função count para contar o total depacientes*/
+select count(id_paciente) as total_pacientes
+from pacientes;
+
+/*Data de consulta mais antiga*/
+select min(data_consulta) as consulta_mais_antiga
+from Consultas;
+/*Calculando a média de valor das consultas*/
+select avg(valor_consulta) as media_valor_consulta
+from consultas;
+
+/*Ordenação em ordem alfabetica usando order by*/
+select*from pacientes
+order by nome asc ;
+
+/*Contando quantas consultas cada médico realizou*/
+SELECT id_medico,COUNT(*) AS total_consultas
+FROM consultas
+GROUP BY id_medico;
+
+/*joins*/
+/*seleciona data de consultas pacientes associados*/
+select p.nome as nome,c.data_consulta
+from pacientes p
+inner join consultas c on p.id_paciente = c.id_paciente;
+
+/*medicos que realizaram consultas*/
+select distinct m.nome
+from  medicos m
+inner join consultas c on m.crm = c.id_medico;
+
+/*medicos que ainda não realizaram consultas*/
+ select m.nome
+from medicos m
+left join consultas c on m.crm = c.id_medico
+where c.id_medico is null;
+
+
+
+
+
+
