@@ -1,35 +1,69 @@
-Nesses projetos sobre  o módulo de Modelagem Conceitual
-Que aborda conceitos como;
-O que é um banco de dados ?
-Coleção de informações organizadas e estruturadas en tabelas matendo um relacionamento claro e lógico
+## Módulo de Modelagem Conceitual
 
-O que é,caracteríticas e funções de um SGBD:
-O que é?
-Um Software que permite criar,manipular e administrar um banco de dados de forma segura e éficiente 
+### O que é um banco de dados?
 
-Características:
-Controle de dados,acessos e integridade
-Compartilhamento de dados
-Esquematização
-Interfaceamento 
-Backup
+Um banco de dados é uma coleção de informações organizadas e estruturadas em tabelas, mantendo um relacionamento claro e lógico entre os dados, o que facilita o armazenamento, a consulta e a manutenção das informações.
 
-Funções:
-Controle de acesso e segurança
-Garantia de integridade 
-Recuperação de falhas 
-Otimização de consultas
+---
 
-Modelagem Relacional:
-Proposta por Edgar F.Codd em 1970 fala que as informações estaõ interconectadas em tabelas,matendo um relacionamento claro e lógico sem redundancia em que temos tabelas,atributos e tuplas 
+### O que é um SGBD (Sistema de Gerenciamento de Banco de Dados)?
 
-Modelo Entidade Relacionamento 
-Elaborado por Peter Chen em 1976 modela o mundo real de forma intuitiva, identificando entidades seus correspondetes atributos e como eles se relacionam 
+**Definição:**
+Um SGBD é um software que permite criar, manipular e administrar um banco de dados de forma segura e eficiente.
 
-Ferramentas
-Usamos a ferramenta mysql workbench que é de fácil uso e versátilidade e como linguagem usamos o MySQL 
+**Principais características:**
 
-Objetivo dos projetos 
-Utilizar de forma prática o conteudo admistrado na aula com o uso de constraints e comandos de DDL e DML
-Modelamos uma Clínica em que temos quatro tabelas,pacientes,medicos,consultas e exames 
+* Controle de dados, acessos e integridade
+* Compartilhamento de dados entre múltiplos usuários
+* Esquematização da estrutura do banco de dados
+* Interfaceamento com usuários e aplicações
+* Realização de backups
 
+**Principais funções:**
+
+* Controle de acesso e segurança
+* Garantia da integridade dos dados
+* Recuperação em caso de falhas
+* Otimização de consultas
+
+---
+
+### Modelagem Relacional
+
+Proposta por **Edgar F. Codd** em 1970, a modelagem relacional estabelece que as informações são organizadas em tabelas interconectadas, mantendo relacionamentos claros e lógicos, evitando redundâncias. Nesse modelo, utilizamos:
+
+* **Tabelas**
+* **Atributos** (colunas)
+* **Tuplas** (linhas)
+
+---
+
+### Modelo Entidade-Relacionamento (MER)
+
+Elaborado por **Peter Chen** em 1976, o Modelo Entidade-Relacionamento representa o mundo real de forma intuitiva, identificando:
+
+* Entidades
+* Seus respectivos atributos
+* Os relacionamentos existentes entre elas
+
+---
+
+### Ferramentas Utilizadas
+
+Para o desenvolvimento dos projetos, utilizamos:
+
+* **MySQL Workbench**, por ser uma ferramenta de fácil uso e grande versatilidade
+* **MySQL** como linguagem para definição e manipulação do banco de dados
+
+---
+
+### Objetivo dos Projetos
+
+Aplicar de forma prática o conteúdo administrado em sala de aula, utilizando **constraints** e comandos de **DDL** e **DML**.
+
+Como estudo de caso, foi modelada uma **Clínica Médica**, composta por quatro tabelas principais:
+
+* Pacientes
+* Médicos
+* Consultas
+* Exames
